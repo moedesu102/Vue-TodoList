@@ -1,5 +1,5 @@
 <script setup>
-import { computed, onMounted, ref } from "vue";
+import { computed, onMounted, ref, watch } from "vue";
 import CompControl from "../components/CompControl.vue";
 import CompForm from "../components/CompForm.vue";
 import CompTitle from "../components/CompTitle.vue";
@@ -22,6 +22,16 @@ onMounted(() => {
     listTask.value = [];
   }
 });
+
+watch(
+  listTask,
+  (newTasks) => {
+    console.log("123");
+    const tasksString = JSON.stringify(newTasks);
+    localStorage.setItem("tasks", tasksString);
+  },
+  { deep: true }
+);
 
 // computed
 const listTaskSearch = computed(() => {
