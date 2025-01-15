@@ -1,26 +1,21 @@
 <script setup>
-defineProps({
-  strSearch: {
-    type: String,
-    default: "",
-  },
-});
+import { useTodoListStore } from "@/stores/todoListStore";
 
-const emit = defineEmits(["handleSearch"]);
+const store = useTodoListStore();
 
 const handleClear = () => {
-  emit("handleSearch", "");
+  store.handleSearch("");
 };
 const handleSearch = (e) => {
-  emit("handleSearch", e.target.value);
+  store.handleSearch(e.target.value);
 };
 </script>
 
 <template>
-  <div class="col-12 col-md-9 mx-auto">
+  <div class="col-12 col-md-6 mx-auto">
     <div class="input-group shadow-sm">
       <input
-        :value="strSearch"
+        :value="store.strSearch"
         @input="handleSearch"
         type="text"
         class="form-control"

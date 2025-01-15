@@ -1,23 +1,14 @@
 <script setup>
-defineProps({
-  isShowForm: {
-    type: Boolean,
-    default: false,
-  },
-});
+import { useTodoListStore } from "@/stores/todoListStore";
 
-const emit = defineEmits(["handleToggleForm"]);
-
-const onClickAddTask = () => {
-  emit("handleToggleForm");
-};
+const store = useTodoListStore();
 </script>
 
 <template>
   <div class="form-group add-task">
     <button
-      v-if="!isShowForm"
-      v-on:click="onClickAddTask"
+      v-if="!store.isShowForm"
+      @click="store.toggleForm()"
       type="button"
       class="btn btn-info btn-block"
     >
@@ -25,7 +16,7 @@ const onClickAddTask = () => {
     </button>
     <button
       v-else
-      v-on:click="onClickAddTask"
+      @click="store.toggleForm()"
       type="button"
       class="btn btn-primary btn-block"
     >
@@ -33,5 +24,3 @@ const onClickAddTask = () => {
     </button>
   </div>
 </template>
-
-<style scoped></style>
